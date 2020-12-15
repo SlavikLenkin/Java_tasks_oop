@@ -4,11 +4,11 @@ package com.mycompany.mytriangle;
 import com.mycompany.mypoint.MyPointImpl;
 
 public class MyTriangleImpl implements MyTriangle {
-    private MyPointImpl v1 ;
+    private MyPointImpl v1;
     private MyPointImpl v2;
     private MyPointImpl v3;
 
-    private enum Triangles{
+    private enum Triangles {
         Equilateral,
         Scalene,
         Isosceles
@@ -22,14 +22,9 @@ public class MyTriangleImpl implements MyTriangle {
     }
 
     public MyTriangleImpl(int x1, int y1, int x2, int y2, int x3, int y3) {
-        v1 = new MyPointImpl();
-        v2 = new MyPointImpl();
-        v3 = new MyPointImpl();
-
-        this.v1.setXY(x1, y1);
-        this.v2.setXY(x2, y2);
-        this.v3.setXY(x3, y3);
-
+        v1 = new MyPointImpl(x1,y1);
+        v2 = new MyPointImpl(x2,y2);
+        v3 = new MyPointImpl(x3,y3);
     }
 
     @Override
@@ -43,8 +38,10 @@ public class MyTriangleImpl implements MyTriangle {
         double b = v1.distance(v3);
         double c = v3.distance(v2);
 
-        if (a == b && b == c) return Triangles.Equilateral.toString();//поправить
-        if (b==c || a==b || c==a)    return Triangles.Isosceles.toString();
+
+        if (Double.compare(a, b) == 0 && Double.compare(b, c) == 0) return Triangles.Equilateral.toString();//поправить
+        if (Double.compare(b, c) == 0 || Double.compare(a, b) == 0 || Double.compare(c, a) == 0)
+            return Triangles.Isosceles.toString();
         return Triangles.Scalene.toString();
     }
 
@@ -53,6 +50,6 @@ public class MyTriangleImpl implements MyTriangle {
         return "MyTriangleImpl[" +
                 "v1=(" + v1.getX() + "," + v1.getY() + ")," +
                 "v2=(" + v2.getX() + "," + v2.getY() + ")," +
-                "v3=(" + v3.getX() + "," + v3.getY() + ")]" ;
+                "v3=(" + v3.getX() + "," + v3.getY() + ")]";
     }
 }
