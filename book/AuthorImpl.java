@@ -1,5 +1,7 @@
 package com.mycompany.book;
 
+import java.util.Objects;
+
 public class AuthorImpl implements Author{
     private String name;
     private String email;
@@ -56,5 +58,20 @@ public class AuthorImpl implements Author{
     @Override
     public String toString() {
         return this.email + " " + this.name +" "+ this.gender;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuthorImpl author = (AuthorImpl) o;
+        return gender == author.gender &&
+                Objects.equals(name, author.name) &&
+                Objects.equals(email, author.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email, gender);
     }
 }

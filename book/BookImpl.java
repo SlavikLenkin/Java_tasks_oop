@@ -1,5 +1,8 @@
 package com.mycompany.book;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class BookImpl implements Book {
 
     private String name;
@@ -59,5 +62,23 @@ public class BookImpl implements Book {
             authorNames.append(",").append(authors[i].getName());
         }
         return authorNames.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookImpl book = (BookImpl) o;
+        return Double.compare(book.price, price) == 0 &&
+                qty == book.qty &&
+                Objects.equals(name, book.name) &&
+                Arrays.equals(authors, book.authors);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, price, qty);
+        result = 31 * result + Arrays.hashCode(authors);
+        return result;
     }
 }

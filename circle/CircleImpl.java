@@ -1,5 +1,7 @@
 package com.mycompany.circle;
 
+import java.util.Objects;
+
 public class CircleImpl implements Circle {
 
     private double radius = 1.0;
@@ -50,4 +52,17 @@ public class CircleImpl implements Circle {
         return "Circle[radius=" + radius + ",color=" + color + "]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CircleImpl circle = (CircleImpl) o;
+        return Double.compare(circle.radius, radius) == 0 &&
+                Objects.equals(color, circle.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(radius, color);
+    }
 }

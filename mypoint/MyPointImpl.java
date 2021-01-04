@@ -1,5 +1,7 @@
 package com.mycompany.mypoint;
 
+import java.util.Objects;
+
 public class MyPointImpl implements MyPoint {
     private int x = 0;
     private int y = 0;
@@ -64,5 +66,19 @@ public class MyPointImpl implements MyPoint {
     @Override
     public String toString() {
         return "(" + x + "," + y + ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyPointImpl myPoint = (MyPointImpl) o;
+        return x == myPoint.x &&
+                y == myPoint.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

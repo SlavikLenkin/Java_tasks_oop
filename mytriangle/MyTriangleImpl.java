@@ -3,6 +3,8 @@ package com.mycompany.mytriangle;
 
 import com.mycompany.mypoint.MyPointImpl;
 
+import java.util.Objects;
+
 public class MyTriangleImpl implements MyTriangle {
     private MyPointImpl v1;
     private MyPointImpl v2;
@@ -51,5 +53,20 @@ public class MyTriangleImpl implements MyTriangle {
                 "v1=(" + v1.getX() + "," + v1.getY() + ")," +
                 "v2=(" + v2.getX() + "," + v2.getY() + ")," +
                 "v3=(" + v3.getX() + "," + v3.getY() + ")]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyTriangleImpl that = (MyTriangleImpl) o;
+        return Objects.equals(v1, that.v1) &&
+                Objects.equals(v2, that.v2) &&
+                Objects.equals(v3, that.v3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(v1, v2, v3);
     }
 }

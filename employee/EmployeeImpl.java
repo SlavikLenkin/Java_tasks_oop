@@ -1,5 +1,7 @@
 package com.mycompany.employee;
 
+import java.util.Objects;
+
 public class EmployeeImpl implements Employee {
 
     private int id;
@@ -59,5 +61,21 @@ public class EmployeeImpl implements Employee {
     public String toString() {
         return "Employee[id=" + id + ",name=" + getName() + ",salary=" + salary + "]";
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeImpl employee = (EmployeeImpl) o;
+        return id == employee.id &&
+                salary == employee.salary &&
+                Objects.equals(firstname, employee.firstname) &&
+                Objects.equals(lastName, employee.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastName, salary);
     }
 }

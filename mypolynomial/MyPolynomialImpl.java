@@ -1,5 +1,7 @@
 package com.mycompany.mypolynomial;
 
+import java.util.Arrays;
+
 public class MyPolynomialImpl implements MyPolynomial {
 
     private double[] coeffs;
@@ -59,12 +61,25 @@ public class MyPolynomialImpl implements MyPolynomial {
 
     @Override
     public String toString() {
-        StringBuilder polynomial = new StringBuilder("");
+        StringBuilder polynomial = new StringBuilder();
         for (int i = coeffs.length - 1; i > 1; i--) {
             polynomial.append(coeffs[i] + "x^" + i + " + ");
         }
         polynomial.append(coeffs[1] + "x + " + coeffs[0]);
         return polynomial.toString();
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MyPolynomialImpl that = (MyPolynomialImpl) o;
+        return Arrays.equals(coeffs, that.coeffs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(coeffs);
     }
 }
